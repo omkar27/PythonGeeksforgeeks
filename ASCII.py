@@ -1,0 +1,1 @@
+print "Ascii of P", ord("P")
