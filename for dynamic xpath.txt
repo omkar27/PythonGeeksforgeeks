@@ -1,0 +1,42 @@
+*** Settings ***
+Library  Selenium2Library
+Library  Collections
+
+*** Variables ***
+${index}
+*** Test Cases ***
+first
+    Login
+    Navigate to user details
+
+
+*** Keywords ***
+Login
+    open browser  https://pune.vaultize.com     Chrome
+    MAXIMIZE BROWSER WINDOW
+    wait until element is visible  //*[@id="uiuser"]
+    click element  //*[@id="uiuser"]
+    input text  //*[@id="uiuser"]   omkar@vaultize.com
+    wait until element is visible  //*[@id="password"]
+    click element  //*[@id="password"]
+    input text  //*[@id="password"]     vault@123
+    wait until element is visible  //*[@id="validate"]
+    click element  //*[@id="validate"]
+Navigate to user details
+    wait until element is visible  //p[contains(text(),'Users')]
+    click element  //p[contains(text(),'Users')]
+    wait until element is visible  //a[contains(text(),'Users')]
+    click element  //a[contains(text(),'Users')]
+    wait until element is visible  //*[@id="search_table"]/tbody/tr
+    ${s}=    Get Element Count  //*[@id="search_table"]/tbody/tr
+    :FOR    ${index}  IN RANGE    1   ${s+1}
+    \   log to console  ${index}
+    \   ${user}  get text  //*[@id="search_table"]/tbody/tr[${index}]/td[2]/a/span
+    \   log to console  ${user}
+    log to console  ${s}
+    #create list  @{listofusers}
+
+
+
+
+
